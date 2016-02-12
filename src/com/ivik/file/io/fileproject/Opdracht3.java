@@ -4,53 +4,71 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Created by Christian on 7-2-2016.
+ * Met hulp van Rudger :-D
  */
 
 public class Opdracht3 {
+
+        private static File inputFile = new File("Opdracht3.txt");
+        private static File outputFile = new File("TargetOpd3.txt");
+        private static List list = new ArrayList<>();
+
     public static void main(String[] args) throws IOException {
 
-        FileWriter writer;
-        FileReader reader;
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile));
+            BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            String line;
 
-        writer = new FileWriter("TargetOpd3.txt");
+                    while((line = br.readLine()) != null)  {
+                    String[] data = line.split("\\s");
 
-        reader = new FileReader("Opdracht3.txt");
-        char [] in = new char[83];
-        reader.read(in);
+                    for (String s : data)   {
+                        list.add(Double.parseDouble(s));
+                         }
 
+                        sortList();
 
-        List<String> list = new ArrayList<>();
-        list.add(String.valueOf(in));
-        list.add(String.valueOf(55.552));
+                    for (Object num : list) {
+                        bw.write(num.toString()+" ");
+                        }
 
-        writer.write(String.valueOf(list));
-        writer.flush();
-        writer.close();
+                        bw.write("\n");
+                        list.clear();
 
+                    }
+                        br.close();
+                        bw.flush();
+                        bw.close();
+
+        System.out.println("Zie TargetOpd3.txt voor de gesorteerde nummers.");
     }
+
+    private static void sortList() {
+        boolean isSorted = false;
+            Object temp;
+            while (!isSorted) {
+                isSorted = true;
+                for (int i=0; i < list.size()-1; i++) {
+                    int swap = compare(list.get(i), list.get(i+1));
+                    if (swap == 0) {
+                        continue;
+                    } else if(swap == -1) {
+                        temp = list.get(i);
+                        list.set(i, list.get(i+1));
+                        list.set(i+1, temp);
+                        isSorted = false;
+                    }
+                }
+            }
+        }
+
+        private static int compare(Object n1, Object n2) {
+            Double d1 = (Double) n1;
+            Double d2 = (Double) n2;
+            if (d1.doubleValue() == d2.doubleValue()) return 0;
+            if (d1.doubleValue() > d2.doubleValue()) return -1;
+            return 1;
+        }
 }
-
-/*
-Write a class that sorts numbers.
-Create a class that reads a file of numbers and writes a file with each line
-sorted by the numbers.
-
-Sample input file ..
-70.920 38.797
-14.354 99.323 90.374 7.581
-37.507
-3.263
-40.079 27.999 65.213 55.552
-
-Sample Output file
-38.797
-7.581 14.354 70.920 90.374 99.323
-55.552
-37.507
-3.263
-27.999 40.079 65.213
-
-*/

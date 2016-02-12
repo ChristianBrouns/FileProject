@@ -1,6 +1,7 @@
 package com.ivik.file.io.fileproject;
 
 import java.io.*;
+import java.nio.CharBuffer;
 
 /**
  * Created by Christian on 7-2-2016.
@@ -25,45 +26,27 @@ public class Opdracht2 {
 
         writer = new FileWriter("Opdracht2.txt");
 
-        writer.write(10);
-        writer.write(20);
-        writer.write(20);
-        writer.write(5);
-        writer.write(9);
+            writer.write(40);
+            writer.write(10);
+            writer.write(2);
+            writer.write(5);
+            writer.write(14);
 
-        writer.flush();
-        writer.close();
+            writer.flush();
+            writer.close();
+
+
 
         reader = new FileReader("Opdracht2.txt");
         reader.read(in);
 
         System.out.println("In file : " + fileName);
 
-        int a = in[0];
-        int b = in[1];
-        int c = in[2];
-        int d = in[3];
-        int e = in[4];
+        int result = 0;
+        for (int i = 0; i < in.length; i++) {
+            result += in[i];
 
-       System.out.println("Sum of all the integers in this file = " + (a + b + c + d + e));
-
-
+        }
+        System.out.println("Sum of all integers = " + result);
     }
 }
-
-
-
-
-/*
-Print out the sum of integers read from a file.
-Create a file with an integer on each line
-Create a class that reads the file and outputs the sum of all integers in the file
-
-Sample input file :
-23
-77
-
-Sample output
-100
-
- */

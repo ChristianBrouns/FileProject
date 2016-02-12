@@ -64,25 +64,3 @@ public class Opdracht1 {
 
 
 
-/*
-
-Given a positive integer, find the sum of its constituent digits.
-Create a file (text editor) with at least 5 lines. Each line contains an integer.
-Sample input file
-23
-961
-10008
-99
-01
-17
-
-Create a class that reads the file and outputs (per line )the sum of the individual digits.
-So in this case it should output
-5
-16
-9
-18
-1
-8
-
-*/
