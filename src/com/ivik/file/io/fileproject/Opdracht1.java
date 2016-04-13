@@ -1,66 +1,45 @@
 package com.ivik.file.io.fileproject;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Christian on 7-2-2016.
+ * Given a positive integer, find the sum of its constituent digits.
+ * Create a file (text editor) with at least 5 lines. Each line contains an integer.
  */
+
 public class Opdracht1 {
 
+    private static Logger log = Logger.getLogger(String.valueOf(Opdracht1.class));
+
     public static void main(String[] args) throws IOException {
-        checkFile();
-    }
 
-    private static void checkFile() throws IOException {
-        File file = new File("Opdracht1.txt");
-
-        System.out.println("exist ? " + file.exists());
-        System.out.println("created ? " + file.createNewFile());
-
-        System.out.println("File size = " + file.length());
-
-        String fileName = "Opdracht1.txt";
-        FileWriter writer;
-        FileReader reader;
-        writer = new FileWriter("Opdracht1.txt");
-        char[] in = new char[6];
-
-        writer.write(Integer.valueOf("23"));
-        writer.write(Integer.valueOf("961"));
-        writer.write(Integer.valueOf("10008"));
-        writer.write(Integer.valueOf("99"));
-        writer.write(Integer.valueOf("017"));
-        writer.write(Integer.valueOf("17"));
-
-        writer.flush();
-        writer.close();
-
-        reader = new FileReader("Opdracht1.txt");
-        reader.read(in);
+        // do the following while there is a line to read.
+        // readLine from file
+        // calculate result
+        // Print to log file or console or file
 
 
-        System.out.println("In file : " + fileName);
+        List list = null;
+        String line = " ";
+        BufferedReader buffer = new BufferedReader(new FileReader("Opdracht1.txt"));
 
-        int element = 0;
-        for (int count = 0; count < in.length; count++) {
+             while ((line = buffer.readLine()) != null) {
+                list = new ArrayList<Integer>();
+                for (int i = 0; i < line.length(); i++) {
 
-            int x = in[element];
-            int sum = 0;
-            while (x > 0) {
-                sum += x % 10;
-                x = x / 10;
+                        char c = line.charAt(i);
+                        String s = String.format("%c", c);
+                        int num;
 
+                        num = Integer.parseInt(s);
+                        list.add(num);
+                    }
+                }
+        System.out.println(list);
             }
-            element++;
 
-            System.out.println(sum);
-        }
-
-    }
 }
-
-
-
